@@ -1,5 +1,5 @@
 # wox.plugin.marks
-wox的一款插件，可以根据配置快速打开收藏的目录。
+wox 的一款插件，可以根据配置快速打开收藏的目录。
 ## 使用方法
 直接将public目录下的文件夹拷贝到wox插件目录 `Plugins` 下。
 ## 编辑配置文件`config.yml`，例如：
