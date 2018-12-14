@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,10 @@ namespace wox.plugin.marks
     class Main : IPlugin
     {
         protected List<Result> results;
+        private PluginInitContext context;
         public void Init(PluginInitContext context)
         {
+            this.context = context;
             results = NewResult();
         }
         public List<Result> Query(Query query)
@@ -73,7 +76,15 @@ namespace wox.plugin.marks
                                         IcoPath = img,
                                         Action = e =>
                                         {
-                                            System.Diagnostics.Process.Start(val);
+                                            try
+                                            {
+                                                Process.Start(val);
+                                            }
+                                            catch
+                                            {
+                                                context.API.ShowMsg("无法打开" + val, string.Empty, string.Empty);
+                                                return false;
+                                            }
                                             return true;
                                         }
                                     });
