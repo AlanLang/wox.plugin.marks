@@ -10,20 +10,39 @@ namespace wox.plugin.marks
 {
     class Main : IPlugin
     {
+        protected List<Result> results;
         public void Init(PluginInitContext context)
         {
+            results = NewResult();
         }
         public List<Result> Query(Query query)
         {
-            List<Result> results = NewResult();
-            if (string.IsNullOrEmpty(query.Search))
+            try {
+                if (string.IsNullOrEmpty(query.ToString()))
+                {
+                    return results;
+                }
+                else
+                {
+                    return results.Where(m => m.Title.ToLower().Contains(query.Search.ToLower()) || StrToPinyin.GetChineseSpell(m.Title).Contains(query.Search.ToLower())).ToList();
+                }
+            }
+            catch (Exception ex)
             {
+                List<Result> results = NewResult();
+                results.Add(new Result()
+                {
+                    Title = "错误",
+                    SubTitle = ex.Message,
+                    IcoPath = "Images\\web.png",
+                    Action = e =>
+                    {
+                        return false;
+                    }
+                });
                 return results;
             }
-            else
-            {
-                return results.Where(m => m.Title.ToLower().Contains(query.Search.ToLower()) || StrToPinyin.GetChineseSpell(m.Title).Contains(query.Search)).ToList();
-            }
+            
         }
 
         public List<Result> NewResult()

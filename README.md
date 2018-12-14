@@ -1,7 +1,10 @@
 # wox.plugin.marks
 wox 的一款插件，可以根据配置快速打开收藏的目录。
 ## 使用方法
-直接将public目录下的文件夹拷贝到wox插件目录 `Plugins` 下。
+1. `git clone git@github.com:AlanLang/wox.plugin.marks.git`
+2. 编译生成
+3. 将生成的文件夹复制到wox插件目录
+
 ## 编辑配置文件`config.yml`，例如：
 ```
 # 井号开头代表注释

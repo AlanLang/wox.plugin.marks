@@ -299,15 +299,7 @@ namespace wox.plugin.marks
                     myStr.Append(char.ToUpper(vChar));
                 else if ((int)vChar >= 19968 && (int)vChar <= 40869)
                 {
-                    // 若字符Unicode编码在编码范围则 查汉字列表进行转换输出 
-                    foreach (string strList in strChineseCharList)
-                    {
-                        if (strList.IndexOf(vChar) > 0)
-                        {
-                            myStr.Append(strList[0]);
-                            break;
-                        }
-                    }
+                    myStr.Append(vChar.ToString().ToPinYin());
                 }
             }
             return myStr.ToString().ToLower();
